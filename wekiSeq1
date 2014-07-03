@@ -1,0 +1,36 @@
+~tc = TempoClock.new;
+
+(
+
+a = Scale.major;
+
+x = Pbind(\scale, a, \degree, Prand((0..7) ++ (6..0), inf), \dur, 0.25).play(~tc);
+
+)
+
+
+
+
+
+(
+
+t= Task({
+
+	var bpm = 1;
+
+
+	loop{
+		~tc.tempo_(bpm/60);
+		bpm = bpm + 1;
+		0.05.wait;
+	}
+
+}).start;
+
+
+)
+
+(
+x.stop;
+t.stop;
+)
